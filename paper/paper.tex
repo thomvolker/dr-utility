@@ -1,0 +1,780 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+  \setmainfont[]{Latin Modern Roman}
+  \setmathfont[]{Latin Modern Math}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\usepackage{arxiv}
+\usepackage{orcidlink}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={A density ratio framework for evaluating the utility of synthetic data},
+  pdfauthor={Thom Benjamin Volker; Peter-Paul de Wolf; Erik-Jan van Kesteren},
+  pdfkeywords={TODO, TODO},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\usepackage{setspace}
+\doublespacing
+\newcommand{\runninghead}{A Preprint }
+\renewcommand{\runninghead}{Density ratios for utility }
+\title{A density ratio framework for evaluating the utility of synthetic
+data}
+\def\asep{\\\\\\ } % default: all authors on same column
+\def\asep{\And }
+\author{\textbf{Thom Benjamin
+Volker}~\orcidlink{0000-0002-2408-7820}\\Methodology and Statistics
+\textbar{} Methodology\\Utrecht University \textbar{} Statistics
+Netherlands\\Utrecht,\ 3584CH\\\href{mailto:t.b.volker@uu.nl}{t.b.volker@uu.nl}\asep\textbf{Peter-Paul
+de Wolf}\\Methodology\\Statistics Netherlands\\The
+Hague,\ 2490HA\\\href{mailto:pp.dewolf@cbs.nl}{pp.dewolf@cbs.nl}\asep\textbf{Erik-Jan
+van Kesteren}\\Methodology and Statistics\\Utrecht
+University\\Utrecht,\ 3584CH\\\href{mailto:e.vankesteren1@uu.nl}{e.vankesteren1@uu.nl}}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+TODO TODO TODO
+\end{abstract}
+{\bfseries \emph Keywords}
+\def\sep{\textbullet\ }
+TODO \sep 
+TODO
+
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, interior hidden, boxrule=0pt, sharp corners, borderline west={3pt}{0pt}{shadecolor}, breakable, frame hidden]}{\end{tcolorbox}}\fi
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Openly accessible research data accelerates scientific progress
+tremendously {[}ADD REFERENCES{]}. Open data allows third-party
+researchers to answer research questions with already collected data,
+substantially lowering the costs of research. Sharing data in
+combination with code allows others to validate research findings and
+build upon the work. Students can benefit from open data, as it fosters
+education with realistic data, as well as the general public, through
+stimulating citizen science projects. However, openly available research
+data is often at odds with privacy constraints on the dissemination of
+the data. The information may cause harm to individuals or organizations
+if made publicly available. Additionally, sharing their information
+openly may withhold them from participating in future research. These
+constraints have been named among the biggest hurdles in the advancement
+of computational social science
+(\protect\hyperlink{ref-lazer_css_2009}{Lazer et al. 2009}), and among
+top reasons for companies to not share their data with researchers
+(\protect\hyperlink{ref-fpf_2017}{Future of Privacy Forum 2017}). To
+overcome these obstacles, data providers can employ a suite of different
+disclosure limitation techniques before sharing data, for example
+top-coding, record-swapping or adding noise (e.g.,
+\protect\hyperlink{ref-hundepool_disclosure_2012}{Hundepool et al.
+2012}; \protect\hyperlink{ref-willenborg_elements_2012}{Willenborg and
+De Waal 2012}).
+
+Recently, synthetic data has gained substantial traction as a means to
+disclosure limitation. National statistical institutes and other
+government agencies have adopted the synthetic data framework to
+facilitate the use of their data (e.g.,
+\protect\hyperlink{ref-SIPP_Beta_2006}{Abowd, Stinson, and Benedetto
+2006}; \protect\hyperlink{ref-hawala_synthetic_2008}{Hawala 2008};
+\protect\hyperlink{ref-drechsler2012}{Drechsler 2012}). Researchers
+started using synthetic data to train machine learning models
+(\protect\hyperlink{ref-nikolenko2021}{Nikolenko 2021}), and began to
+share synthetic versions of their research data to comply with open
+science standards (e.g., \protect\hyperlink{ref-vandewiel2023}{van de
+Wiel et al. 2023}; \protect\hyperlink{ref-obermeyer2019}{Obermeyer et
+al. 2019}; \protect\hyperlink{ref-zettler2021}{Zettler et al. 2021}).
+The idea of synthetic data is to replace some, or all, of the observed
+values in a data set by synthetic records that are generated from some
+model (e.g., \protect\hyperlink{ref-little_statistical_1993}{Little
+1993}; \protect\hyperlink{ref-rubin_statistical_1993}{Rubin 1993};
+\protect\hyperlink{ref-drechsler2011synthetic}{Drechsler 2011}). If only
+some values are replaced, disclosure risks can be reduced because the
+sensitive or identifying values do not correspond to their true values
+anymore. If all values are replaced, there is also no one-to-one mapping
+between the original and the synthetic data, further reducing the
+disclosure risk.
+
+Many different methods have been proposed to generate synthetic data.
+Traditionally, these were closely connected to methods used for multiple
+imputation of missing data, such as joint modelling {[}misdc2003{]},
+sequential regressions (\protect\hyperlink{ref-nowok2016}{Nowok, Raab,
+and Dibben 2016}) or fully conditional specification
+(\protect\hyperlink{ref-drechsler2011empirical}{Drechsler and Reiter
+2011}; \protect\hyperlink{ref-volker2021}{Volker and Vink 2021}). The
+flexibility of sequential regressions and fully conditional
+specification is commonly combined with non-parametric imputation
+models, such as classification and regression trees
+(\protect\hyperlink{ref-reiter2005}{Reiter 2005}), random forests
+(\protect\hyperlink{ref-caiola2010}{Caiola and Reiter 2010}) or support
+vector machines (\protect\hyperlink{ref-drechsler2010}{Drechsler 2010}),
+to avoid distributional assumptions and easily model non-linear
+relationships. Recently, significant improvements in generative
+modelling sparked the scientific interest in synthetic data in the
+computer science community, leading to novel synthesis methods (e.g.,
+\protect\hyperlink{ref-patki2016}{Patki, Wedge, and Veeramachaneni
+2016}; \protect\hyperlink{ref-xu_ctgan_2019}{Xu et al. 2019}). Combined
+with work on formal privacy guarantees such as differential privacy,
+this resulted in new models that explicitly control the level of privacy
+risk in synthesis methods
+(\protect\hyperlink{ref-jordon2018pategan}{Jordon, Yoon, and Schaar
+2019}; \protect\hyperlink{ref-Torkzadehmahani2019}{Torkzadehmahani,
+Kairouz, and Paten 2019}).
+
+\textbf{\emph{TODO}}
+
+All methods for statistical disclosure limitation alter the data before
+these are provided to the public. By doing so, the utility of the
+provided data is always lower than the utility of the original data,
+because some of the information in the data is sacrificed to protect the
+privacy of the respondents. The questions that naturally arise are how
+much information in the original data is actually sacrificed, and how
+useful the provided data are? Answering this question allows researchers
+to decide what the altered data can and cannot be used for, and to
+evaluate the worth of conclusions drawn on the basis of these data.
+After all, inferences from the altered data are valid only up to the
+extent that the perturbation methods approximate the true
+data-generating mechanism. For data providers, a detailed assessment of
+the quality of the altered data can guide the procedure of altering the
+data. Statistical disclosure limitation is often an iterative process:
+some disclosure limitation technique is applied on the data, after which
+the result is investigated and modifications are made to applied
+process. Good measures of data quality are essential to determine the
+appropriate mechanisms used to protect the data, and can help to improve
+the utility of the data that will be disseminated.
+
+In the statistical disclosure control literature, two different branches
+of utility measures have been distinguished: specific utility measures
+and general utility measures. \emph{Add one/two sentences on the merit
+of visualization when assessing utility of altered data.} Specific
+utility measures focus on similarity of results obtained from analyses
+performed on the altered data and the original data. For example, after
+fitting the same analysis model on both data sets, one can calculate the
+confidence interval overlap of the estimated parameters
+(\protect\hyperlink{ref-karr_utility_2006}{Karr et al. 2006}).
+Alternative measures are ellipsoidal overlap
+(\protect\hyperlink{ref-karr_utility_2006}{Karr et al. 2006}), which
+extends to confidence interval overlap to a measure that addresses the
+joint distribution of all model parameters simultaneous, the
+standardized absolute difference between estimates
+(\protect\hyperlink{ref-snoke_utility_2018}{Snoke et al. 2018}), and the
+ratio of estimates for tabular count data
+(\protect\hyperlink{ref-taub2020impact}{\textbf{taub2020impact?}}). As
+these measures quantify similarity between estimates from analyses
+performed on the observed and altered data, they are informed only to
+the extent that data users will recreate those analyses. This can be
+highly useful if the data is provided for reproducibility purposes
+(e.g., for third parties to evaluate analysis scripts). However, the
+goal of distributing the protected data is often to allow researchers to
+do novel research with the data. In many practical situations, data
+providers thus have have only limited knowledge on the analyses that
+will be performed with the altered data. Covering the entire set of
+potentially relevant analyses is therefore not feasible. If it was, the
+data providers could simply report the (potentially privacy-protected)
+results of those analyses performed on the real data, so that access to
+the (perturbed) data no longer yields additional benefits (for a similar
+argument, see \protect\hyperlink{ref-drechsler_utility_2022}{Drechsler
+2022}). Additionally, similarity between results on the analyses that
+have been performed gives no guarantee that the results will also be
+similar for other analyses. Hence, when determining how useful the
+altered data is for novel research, specific utility measures are only
+of limited use.
+
+General utility measures attempt to capture how similar the multivariate
+distributions of the observed and altered data are. This can be done by,
+for instance, estimating the Kullback-Leibler divergence between the
+distributions of the observed and altered data
+(\protect\hyperlink{ref-karr_utility_2006}{Karr et al. 2006}). An
+alternative strategy is to try to discriminate between the observed and
+altered data, as is done with the \(pMSE\)
+(\protect\hyperlink{ref-snoke_utility_2018}{Snoke et al. 2018};
+\protect\hyperlink{ref-woo_utility_2009}{\textbf{woo\_utility\_2009?}}).
+In essence, the \(pMSE\) quantifies how well one can predict whether
+observations are from the observed or the altered data. If better one
+can do this, the more pronounced the differences between the observed
+and altered data ought to be. However, various authors have criticized
+general utility measures for being too broad. That is, important
+discrepancies between the real and altered data might be missed, and an
+altered data set that is good in general (i.e., has high global utility)
+might still provide results that are far from the truth for some
+analyses (see, e.g.,
+\protect\hyperlink{ref-drechsler_utility_2022}{Drechsler 2022}).
+Additionally, it is not straightforward to determine which prediction
+model to use for calculating the \(pMSE\). Specifying a good prediction
+model in itself may be a challenging task, especially when the number of
+variables is large. When good models are available, different models, or
+even different choices of hyperparameters, may yield different results,
+potentially rendering ambiguity with respect to which altered data set
+is best. Lastly, the output of global utility measures can be hard to
+interpret, and say little about the regions in which the synthetic data
+do not resemble the true data accurately enough. That is, they give
+little guidance on how the quality of the altered data can be improved.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Section 6: our contribution}
+
+\emph{Moet nog verder uitgewerkt worden}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  We introduce density ratio estimation to the field of statistical
+  disclosure control. Short remark on the idea that density ratio
+  estimation is a complicated endeavor, especially if the goal is to
+  compare distinct densities. Having to estimate just a single density
+  (ratio) is generally much easier.
+\item
+  Note that density ratio estimation can capture specific and general
+  utility measures into a common framework by being applicable on the
+  level of the entire data, but also on the subset of variables that is
+  relevant in an analysis. Additionally, note that confidence interval
+  overlap, ellipsoidal overlap, but also \(pMSE\) and Kullback-Leibler
+  divergence, are closely related to density ratio estimation, and can
+  be considered from this perspective.
+\item
+  Create a new utility metric based on density ratio estimation
+  (probability with respect to some reference distribution as in
+  permutation testing).
+\item
+  Because density ratio estimation can be difficult when there are many
+  variables, we use dimension reduction techniques to capture most of
+  the variability in the data in fewer dimensions on which density ratio
+  estimation can be applied. A by-product of this is that the
+  lower-dimensional subspace allows to create visualizations of
+  deviations from the observed data.
+\item
+  Perform a simulation study to give indications about which methods to
+  use (think about how to do this).
+\item
+  Implement all this in an R-package
+\end{enumerate}
+
+\textbf{Section 6: outline article}
+
+In the next section, we describe density ratio estimation and discuss
+how this method can be used as to measure utility. Subsequently, we
+provide multiple examples that show how density ratio estimation works
+in the context of evaluating the quality of synthetic data. Hereafter,
+we show in multiple simulations that the method is superior (HOPEFULLY)
+to current global utility measures as the \(pMSE\). Lastly, we discuss
+the advantages and disadvantages of density ratio estimation as a
+utility measure.
+
+\hypertarget{methodology}{%
+\section{Methodology}\label{methodology}}
+
+@Peter-Paul: Eventueel een korte beschrijving van data perturbation
+techniques/synthetic data generation hier. Denk je dat dit wat toevoegt
+hier?
+
+\textbf{Section 1: density ratio estimation}
+
+In essence, the goal of utility measures is to quantify the similarity
+between the multivariate distribution of the observed data with the
+distribution of the altered data. If the used data perturbation
+techniques, or synthetic data generation models, approximate the
+distribution of the real data sufficiently, these distributions should
+be highly similar, and analyses on the two data sets should give similar
+results. However, estimating the probability distribution of a data set
+is known to be one of the most complicated challenges in statistics
+{[}E.G. Vapnik 1998{]}. Estimating the probability distribution for both
+observed and altered data can lead to errors in both, artificially
+magnifying discrepancies between the two. Hence, subsequent comparisons
+will be affected by these errors. The procedure can be simplified by
+using density ratio estimation, because this only requires to estimate a
+single density.
+
+Introduce density ratio estimation as a utility measure. What does this
+measure mean/how to interpret it. How to make decisions based on this
+measure.
+
+Say something on whether (and if so, how) categorical variables can be
+incorporated as well.
+
+\textbf{Section 3: theoretical comparison with conventional approaches
+for general utility assessment}
+
+Relate density ratio estimation to specific and general utility
+measures. Pick one/two specific utility measures and relate these to
+density ratio estimation (ratio of estimates seems straightforward, as
+well as confidence interval overlap and ellipsoidal overlap).
+
+Relate density ratio estimation to \(pMSE\) and KL divergence (to some
+extent, both are generalizations of density ratio estimation, or at
+least are conceptually similar). Give some more information on the
+\(pMSE\), describe what it shortcomings are. The quality of the \(pMSE\)
+highly depends on the model used to calculate the propensity scores.
+Perhaps give an example of logistic regression, which basically
+estimates whether the conditional mean of the observed and altered data
+is the same. Explain how density ratio estimation can overcome the
+shortcomings of the previously mentioned methods.
+
+\textbf{Section 4: Dimension reduction for utility}
+
+The difficulty of density ratio estimation increases with the
+dimensionality of the data. Therefore, we follow previous
+recommendations to incorporate dimensionality reduction techniques in
+density ratio estimation.
+
+Shortly name examples of dimensionality reduction techniques (i.e., PCA;
+LFDA or UMAP).
+
+A useful by-product of dimension reduction is that it allows to create
+visualizations, and these visualizations can be used to get more insight
+in discrepancies between observed and altered data. Show what such
+visualizations can look like, and how they can help.
+
+\hypertarget{simulations}{%
+\section{Simulations}\label{simulations}}
+
+\hypertarget{small-illustration-example-with-multivariate-gaussian-distributions.}{%
+\subsection{Small illustration / example with multivariate Gaussian
+distributions.}\label{small-illustration-example-with-multivariate-gaussian-distributions.}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Simple, multivariate normal simulation (e.g., two correlation
+  structures, two sample sizes, so \(2 \times 2\) full factorial
+  design); basically similar to what we did already.
+\end{enumerate}
+
+\hypertarget{more-complex-simulation-more-variables-non-linearities-perhaps-using-real-data.}{%
+\subsection{More complex simulation, more variables, non-linearities,
+perhaps using real
+data.}\label{more-complex-simulation-more-variables-non-linearities-perhaps-using-real-data.}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  More advanced simulation (e.g., some non-linearities, different sample
+  sizes)
+\end{enumerate}
+
+Have to think about this in more detail still.
+
+\hypertarget{real-data-example}{%
+\section{Real data example}\label{real-data-example}}
+
+Clinical records heart-failure data? Misschien ook niet, nog over
+nadenken.
+
+Exemplify how utility measures could (should!) be used to improve the
+quality of the altered data (e.g., illustrate how models can be adjusted
+iteratively based on utility assessment).
+
+\emph{Some notes to self}
+
+Current ways to assess the utility?
+
+\begin{itemize}
+\item
+  pMSE - logistic, regression, CART models (Snoke, Raab, Nowok, Dibben
+  \& Slavkovic, 2018; General and specific utility measures for
+  synthetic data AND Woo, Reiter, Oganian \& Karr, 2009; Global measures
+  of data utlity for microdata masked for disclosure limitation)
+\item
+  Kullback-Leiber divergence (Karr, Kohnen, Oganian, Reiter \& Sanil,
+  2006; A framework for evaluating the utility of data altered to
+  protect confidentiality).
+\item
+  According to multiple authors, both specific and general utility
+  measures have important drawbacks (see Drechsler Utility PSD; cites
+  others). Narrow measures potentially focus on analyses that are not
+  relevant for the end user, and do not generalize to the analyses that
+  are relevant. Global utility measures are generally too broad, and
+  important deviations in the synthetic data might be missed. Moreover,
+  the measures are typically hard to interpret.
+\item
+  See Drechsler for a paragraph on fit for purpose measures, that lie
+  between general and specific utility measures (i.e., plausibility
+  checks such as non-negativity; goodness of fit measures as \(\chi^2\)
+  for cross-tabulations; Kolmogorov-Smirnov).
+\item
+  Drechsler also illustrates that the standardized \(pMSE\) has
+  substantial flaws, as the results are highly dependent on the model
+  used to estimate the propensity scores, and unable to detect important
+  differences in the utility for most of the model specifications.
+  Hence, it is claimed that a thorough assessment of utility is
+  required.
+\end{itemize}
+
+Things to add in new version: - High dimensional example - Expansion of
+discussion points: empirical example with weighted analyses individual
+data utility - Privacy remark? - When does it not work?
+
+\hypertarget{methodology-1}{%
+\section{Methodology}\label{methodology-1}}
+
+TO DO
+
+\hypertarget{simulations-1}{%
+\section{Simulations}\label{simulations-1}}
+
+TO DO
+
+\hypertarget{real-data-example-1}{%
+\section{Real data example}\label{real-data-example-1}}
+
+TO DO
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+TO DO
+
+\hypertarget{discussion-and-conclusion}{%
+\section{Discussion and conclusion}\label{discussion-and-conclusion}}
+
+TO DO
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-SIPP_Beta_2006}{}}%
+Abowd, John M., Martha Stinson, and Gary Benedetto. 2006. {``Final
+Report to the Social Security Administration on the {SIPP/SSA/IRS}
+Public Use File Project.''} Longitudinal Employer-Household Dynamics
+Program, U.S. Bureau of the Census, Washington, DC.
+\url{https://ecommons.cornell.edu/bitstream/handle/1813/43929/SSAfinal.pdf?sequence=3\&isAllowed=y}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-caiola2010}{}}%
+Caiola, Gregory, and Jerome P. Reiter. 2010. {``Random Forests for
+Generating Partially Synthetic, Categorical Data.''} \emph{Transactions
+on Data Privacy} 3: 27--42.
+\url{https://doi.org/10.5555/1747335.1747337}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-drechsler2010}{}}%
+Drechsler, Jörg. 2010. {``Using Support Vector Machines for Generating
+Synthetic Datasets.''} In \emph{Privacy in Statistical Databases},
+edited by Josep Domingo-Ferrer and Emmanouil Magkos, 148--61. Berlin,
+Heidelberg: Springer Berlin Heidelberg.
+\url{https://doi.org/10.1007/978-3-642-15838-4_14}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-drechsler2011synthetic}{}}%
+---------. 2011. \emph{Synthetic Datasets for Statistical Disclosure
+Control: Theory and Implementation}. New York: Springer Science \&
+Business Media. \url{https://doi.org/10.1007/978-1-4614-0326-5}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-drechsler2012}{}}%
+---------. 2012. {``New Data Dissemination Approaches in Old Europe
+{\textendash} Synthetic Datasets for a German Establishment Survey.''}
+\emph{Journal of Applied Statistics} 39 (2): 243--65.
+\url{https://doi.org/10.1080/02664763.2011.584523}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-drechsler_utility_2022}{}}%
+---------. 2022. {``Challenges in Measuring Utility for Fully Synthetic
+Data.''} In \emph{Privacy in Statistical Databases}, edited by Josep
+Domingo-Ferrer and Maryline Laurent, 220--33. Cham: Springer
+International Publishing.
+\url{https://doi.org/10.1007/978-3-031-13945-1_16}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-drechsler2011empirical}{}}%
+Drechsler, Jörg, and Jerome P Reiter. 2011. {``An Empirical Evaluation
+of Easily Implemented, Nonparametric Methods for Generating Synthetic
+Datasets.''} \emph{Computational Statistics \& Data Analysis} 55 (12):
+3232--43.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fpf_2017}{}}%
+Future of Privacy Forum. 2017. {``Understanding Corporate Data Sharing
+Decisions: Practices, Challenges, and Opportunities for Sharing
+Corporate Data with Researchers.''}
+
+\leavevmode\vadjust pre{\hypertarget{ref-hawala_synthetic_2008}{}}%
+Hawala, Sam. 2008. \emph{Producing Partially Synthetic Data to Avoid
+Disclosure}.
+\url{http://www.asasrms.org/Proceedings/y2008/Files/301018.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hundepool_disclosure_2012}{}}%
+Hundepool, Anco, Josep Domingo-Ferrer, Luisa Franconi, Sarah Giessing,
+Eric Schulte Nordholt, Keith Spicer, and Peter-Paul De Wolf. 2012.
+\emph{Statistical Disclosure Control}. John Wiley \& Sons.
+\url{https://doi.org/10.1002/9781118348239}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-jordon2018pategan}{}}%
+Jordon, James, Jinsung Yoon, and Mihaela van der Schaar. 2019.
+{``{PATE}-{GAN}: Generating Synthetic Data with Differential Privacy
+Guarantees.''} In \emph{International Conference on Learning
+Representations}. \url{https://openreview.net/forum?id=S1zk9iRqF7}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-karr_utility_2006}{}}%
+Karr, Alan F., Christine N. Kohnen, Anna Oganian, Jerome P. Reiter, and
+Ashish P. Sanil. 2006. {``A Framework for Evaluating the Utility of Data
+Altered to Protect Confidentiality.''} \emph{The American Statistician}
+60 (3): 224--32. \url{https://doi.org/10.1198/000313006X124640}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-lazer_css_2009}{}}%
+Lazer, David, Alex Pentland, Lada Adamic, Sinan Aral, Albert-László
+Barabási, Devon Brewer, Nicholas Christakis, et al. 2009.
+{``Computational Social Science.''} \emph{Science} 323 (5915): 721--23.
+\url{https://doi.org/10.1126/science.1167742}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-little_statistical_1993}{}}%
+Little, Roderick J. A. 1993. {``Statistical Analysis of Masked Data.''}
+\emph{Journal of Official Statistics} 9 (2): 407--7.
+\url{https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/statistical-analysis-of-masked-data.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-nikolenko2021}{}}%
+Nikolenko, Sergey I. 2021. \emph{Synthetic Data for Deep Learning}.
+Springer International Publishing.
+\url{https://doi.org/10.1007/978-3-030-75178-4}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-nowok2016}{}}%
+Nowok, Beata, Gillian M. Raab, and Chris Dibben. 2016.
+{``{\emph{Synthpop}:} Bespoke Creation of Synthetic Data in
+{\emph{R}}.''} \emph{Journal of Statistical Software} 74 (11).
+\url{https://doi.org/10.18637/jss.v074.i11}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-obermeyer2019}{}}%
+Obermeyer, Ziad, Brian Powers, Christine Vogeli, and Sendhil
+Mullainathan. 2019. {``Dissecting Racial Bias in an Algorithm Used to
+Manage the Health of Populations.''} \emph{Science} 366 (6464): 447--53.
+\url{https://doi.org/10.1126/science.aax2342}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-patki2016}{}}%
+Patki, Neha, Roy Wedge, and Kalyan Veeramachaneni. 2016. {``The
+Synthetic Data Vault.''} \emph{2016 IEEE International Conference on
+Data Science and Advanced Analytics (DSAA)}, October.
+\url{https://doi.org/10.1109/dsaa.2016.49}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-reiter2005}{}}%
+Reiter, Jerome P. 2005. {``Using CART to Generate Partially Synthetic
+Public Use Microdata.''} \emph{Journal of Official Statistics} 21 (3):
+441--62.
+\url{https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/using-cart-to-generate-partially-synthetic-public-use-microdata.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-rubin_statistical_1993}{}}%
+Rubin, Donald B. 1993. {``Statistical Disclosure Limitation.''}
+\emph{Journal of Official Statistics} 9 (2): 461--68.
+\url{https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/discussion-statistical-disclosure-limitation2.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-snoke_utility_2018}{}}%
+Snoke, Joshua, Gillian M. Raab, Beata Nowok, Chris Dibben, and
+Aleksandra Slavkovic. 2018. {``General and Specific Utility Measures for
+Synthetic Data.''} \emph{Journal of the Royal Statistical Society.
+Series A (Statistics in Society)} 181 (3): pp. 663--688.
+\url{https://doi.org/10.1111/rssa.12358}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Torkzadehmahani2019}{}}%
+Torkzadehmahani, Reihaneh, Peter Kairouz, and Benedict Paten. 2019.
+{``{DP-CGAN}: Differentially Private Synthetic Data and Label
+Generation.''} In \emph{Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition (CVPR) Workshops}.
+\url{https://doi.org/10.1109/cvprw.2019.00018}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-vandewiel2023}{}}%
+van de Wiel, Mark A., Gwenaël G. R. Leday, Jeroen Hoogland, Martijn W.
+Heymans, Erik W. van Zwet, and Ailko H. Zwinderman. 2023. {``Think
+Before You Shrink: Alternatives to Default Shrinkage Methods Can Improve
+Prediction Accuracy, Calibration and Coverage.''}
+\url{https://doi.org/10.48550/ARXIV.2301.09890}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-volker2021}{}}%
+Volker, Thom Benjamin, and Gerko Vink. 2021. {``Anonymiced Shareable
+Data: Using Mice to Create and Analyze Multiply Imputed Synthetic
+Datasets.''} \emph{Psych} 3 (4): 703--16.
+\url{https://doi.org/10.3390/psych3040045}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-willenborg_elements_2012}{}}%
+Willenborg, Leon, and Ton De Waal. 2012. \emph{Elements of Statistical
+Disclosure Control}. Springer Science \& Business Media.
+\url{https://doi.org/10.1007/978-1-4613-0121-9}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-xu_ctgan_2019}{}}%
+Xu, Lei, Maria Skoularidou, Alfredo Cuesta-Infante, and Kalyan
+Veeramachaneni. 2019. {``Modeling Tabular Data Using Conditional GAN.''}
+In \emph{Advances in Neural Information Processing Systems}, edited by
+H. Wallach, H. Larochelle, A. Beygelzimer, F. dAlché-Buc, E. Fox, and R.
+Garnett. Vol. 32. Curran Associates, Inc.
+\url{https://proceedings.neurips.cc/paper_files/paper/2019/file/254ed7d2de3b23ab10936522dd547b78-Paper.pdf}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-zettler2021}{}}%
+Zettler, Ingo, Christoph Schild, Lau Lilleholt, Lara Kroencke, Till
+Utesch, Morten Moshagen, Robert Böhm, Mitja D. Back, and Katharina
+Geukes. 2021. {``The Role of Personality in COVID-19-Related
+Perceptions, Evaluations, and Behaviors: Findings Across Five Samples,
+Nine Traits, and 17 Criteria.''} \emph{Social Psychological and
+Personality Science} 13 (1): 299--310.
+\url{https://doi.org/10.1177/19485506211001680}.
+
+\end{CSLReferences}
+
+
+
+\end{document}
