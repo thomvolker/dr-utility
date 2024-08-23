@@ -25,6 +25,22 @@
 	url = {https://www.learntechlib.org/p/161986}
 }
 
+@article{basu_power_1998,
+    author = {Basu, Ayanendranath and Harris, Ian R. and Hjort, Nils L. and Jones, M.C.},
+    title = "{Robust and efficient estimation by minimising a density power divergence}",
+    journal = {Biometrika},
+    volume = {85},
+    number = {3},
+    pages = {549-559},
+    year = {1998},
+    month = {09},
+    doi = {10.1093/biomet/85.3.549}
+}
+
+
+
+
+
 @Article{Bowen_differentially_2021,
   author={Bowen, Claire McKay and Liu, Fang and Su, Bingyue},
   title={Differentially private data release via statistical election to partition sequentially},
@@ -186,6 +202,35 @@
   author     = {{European Parliament} and {Council of the European Union}},
   urldate    = {2023-04-13},
 }
+
+@InProceedings{gehrke_crowd_2012,
+  author={Gehrke, Johannes and Hay, Michael and Lui, Edward and Pass, Rafael},
+  editor={Safavi-Naini, Reihaneh and Canetti, Ran},
+  title={Crowd-Blending Privacy},
+  booktitle={Advances in Cryptology -- CRYPTO 2012},
+  year={2012},
+  publisher={Springer Berlin Heidelberg},
+  address={Berlin, Heidelberg},
+  pages={479--496},
+  doi={10.1007/978-3-642-32009-5_28}
+}
+
+
+@InProceedings{ghalebikesabi_dpiw_2022,
+  title = 	 {Mitigating statistical bias within differentially private synthetic data},
+  author =       {Ghalebikesabi, Sahra and Wilde, Harry and Jewson, Jack and Doucet, Arnaud and Vollmer, Sebastian and Holmes, Chris},
+  booktitle = 	 {Proceedings of the Thirty-Eighth Conference on Uncertainty in Artificial Intelligence},
+  pages = 	 {696--705},
+  year = 	 {2022},
+  editor = 	 {Cussens, James and Zhang, Kun},
+  volume = 	 {180},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {01--05 Aug},
+  publisher = {PMLR},
+  url = 	 {https://proceedings.mlr.press/v180/ghalebikesabi22a.html}
+}
+
+
 
 @misc{gruber2024overcoming,
       title={Overcoming Saturation in Density Ratio Estimation by Iterated Regularization},
@@ -350,6 +395,14 @@ doi = {10.1214/20-AOS1962},
 URL = {https://doi.org/10.1214/20-AOS1962}
 }
 
+@Manual{kldest,
+  title = {kldest: Sample-Based Estimation of Kullback-Leibler Divergence},
+  author = {Niklas Hartung},
+  year = {2024},
+  note = {R package version 1.0.0},
+  url = {https://CRAN.R-project.org/package=kldest},
+}
+
 
 
 @article{lazer_css_2009,
@@ -364,6 +417,17 @@ URL = {https://doi.org/10.1214/20-AOS1962}
   URL = {https://www.science.org/doi/abs/10.1126/science.1167742},
 }
 
+@ARTICLE{li_application_2010,
+  author={Li, Yan and Kambara, Hiroyuki and Koike, Yasuharu and Sugiyama, Masashi},
+  journal={IEEE Transactions on Biomedical Engineering},
+  title={Application of Covariate Shift Adaptation Techniques in Brain–Computer Interfaces},
+  year={2010},
+  volume={57},
+  number={6},
+  pages={1318-1324},
+  doi={10.1109/TBME.2009.2039997}
+}
+
 
 @article{liu_change_2013,
   title = {Change-point detection in time-series data by relative density-ratio estimation},
@@ -375,6 +439,19 @@ URL = {https://doi.org/10.1214/20-AOS1962}
   doi = {10.1016/j.neunet.2013.01.012},
   url = {https://www.sciencedirect.com/science/article/pii/S0893608013000270},
   author = {Song Liu and Makoto Yamada and Nigel Collier and Masashi Sugiyama}
+}
+
+@article{loftsgaarden_nonparametric_1965,
+author = {D. O. Loftsgaarden and C. P. Quesenberry},
+title = {{A Nonparametric Estimate of a Multivariate Density Function}},
+volume = {36},
+journal = {The Annals of Mathematical Statistics},
+number = {3},
+publisher = {Institute of Mathematical Statistics},
+pages = {1049 -- 1051},
+year = {1965},
+doi = {10.1214/aoms/1177700079},
+URL = {https://doi.org/10.1214/aoms/1177700079}
 }
 
 @article{mcclure2016assessing,
@@ -459,7 +536,7 @@ URL = {https://doi.org/10.1214/20-AOS1962}
 	url = {http://dx.doi.org/10.1007/978-3-030-75178-4}
 }
 
-@article{nowok2016,
+@article{synthpop,
 	title = {{\emph{synthpop}:} Bespoke Creation of Synthetic Data in {\emph{R}}},
 	author = {Nowok, Beata and Raab, Gillian M. and Dibben, Chris},
 	year = {2016},
@@ -533,13 +610,13 @@ URL = {https://doi.org/10.1214/20-AOS1962}
 
 
 @Manual{R,
-  title = {R: A Language and Environment for Statistical Computing},
-  author = {{R Core Team}},
-  organization = {R Foundation for Statistical Computing},
-  address = {Vienna, Austria},
-  year = {2023},
-  url = {https://www.R-project.org/},
-}
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2024},
+    url = {https://www.R-project.org/},
+  }
 
 @misc{raab2017guidelines,
       title={Guidelines for Producing Useful Synthetic Data},
@@ -570,6 +647,16 @@ URL = {https://doi.org/10.1214/20-AOS1962}
   keywords = {cyberinfrastructure, NASA, open access, open data, open science, open source},
   doi = {10.1029/2020EA001562},
   year = {2021}
+}
+
+@Book{Rcpp,
+  title = {Seamless {R} and {C++} Integration with {Rcpp}},
+  author = {Dirk Eddelbuettel},
+  publisher = {Springer},
+  address = {New York},
+  year = {2013},
+  note = {ISBN 978-1-4614-6867-7},
+  doi = {10.1007/978-1-4614-6868-4},
 }
 
 @article{reiter_releasing_2004,
@@ -634,6 +721,16 @@ URL = {https://doi.org/10.1214/20-AOS1962}
   pages={461--468},
   year={1993},
   url={https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/discussion-statistical-disclosure-limitation2.pdf}
+}
+
+@book{scholkopf_smola_kernels_2001,
+    author = {Schölkopf, Bernhard and Smola, Alexander J.},
+    title = "{Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond}",
+    publisher = {The MIT Press},
+    year = {2001},
+    month = {12},
+    isbn = {9780262256933},
+    doi = {10.7551/mitpress/4175.001.0001}
 }
 
 @book{Scott1992,
@@ -827,6 +924,18 @@ URL = {https://doi.org/10.1214/20-AOS1962}
 	doi = {10.3390/psych3040045},
 	url = {http://dx.doi.org/10.3390/psych3040045},
 	langid = {en}
+}
+
+@ARTICLE{wang_divergence_2009,
+  author={Wang, Qing and Kulkarni, Sanjeev R. and Verdu, Sergio},
+  journal={IEEE Transactions on Information Theory},
+  title={Divergence Estimation for Multidimensional Densities Via $k$-Nearest-Neighbor Distances},
+  year={2009},
+  volume={55},
+  number={5},
+  pages={2392-2405},
+  keywords={Multidimensional systems;Partitioning algorithms;Mutual information;Frequency estimation;Convergence;Information theory;Neuroscience;Probability distribution;Density measurement;Laboratories;Divergence;information measure;Kullback–Leibler;nearest-neighbor;partition;random vector;universal estimation},
+  doi={10.1109/TIT.2009.2016060}
 }
 
 @book{willenborg_elements_2001,
