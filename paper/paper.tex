@@ -281,20 +281,21 @@ of sensitive data while mitigating the risk of privacy breaches.
 However, for synthetic data to be useful in downstream analysis tasks,
 it needs to be of sufficient quality. Various methods have been proposed
 to measure the utility of synthetic data, but their results are often
-incomplete or even misleading. In this paper, we propose using density
-ratio estimation to improve quality evaluation for synthetic data, and
-thereby the quality of synthesized datasets. We show how this framework
-relates to and builds on existing measures, yielding global and local
-utility measures that are informative and easy to interpret. We develop
-an estimator which requires little to no manual tuning due to automatic
-selection of a nonparametric density ratio model. Through simulations,
-we find that density ratio estimation yields more accurate estimates of
-global utility than established procedures. A real-world data
-application demonstrates how the density ratio can guide refinements of
-synthesis models and can be used to improve downstream analyses. We
-conclude that density ratio estimation is a valuable tool in synthetic
-data generation workflows and provide these methods in the accessible
-open source R-package densityratio.
+incomplete or even misleading. In this paper, we propose to use the
+density ratio estimation framework to improve quality evaluation for
+synthetic data, and thereby improve the quality of synthesized datasets.
+We show how this framework relates to and builds on existing measures,
+yielding global and local utility measures that are informative and easy
+to interpret. The proposed methodology employs automatic, non-parametric
+model selection for the density ratio, and thus requires little to no
+manual model specification. Through simulations, we find that density
+ratio estimation yields more accurate estimates of global utility than
+established procedures. A real-world data application demonstrates how
+the density ratio can guide refinements of synthesis models and can be
+used to improve downstream analyses. We conclude that density ratio
+estimation is a valuable tool in synthetic data generation workflows and
+make the methodology available through the open source R-package
+densityratio.
 \end{abstract}
 {\bfseries \emph Keywords}
 \def\sep{\textbullet\ }
