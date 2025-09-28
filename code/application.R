@@ -126,24 +126,17 @@ syn_coefs_adj <- map2(PE_allvars$semi, synlist$semi$syn, \(w, syn) {
      ) |> coef()
 })
 
-syn_coefs_cart <- lapply(
-  synlist$smoothed$syn,
-  \(syn) lm(log(income) ~ . - tax - ss + log(tax+1) + log(ss+1), syn) |> coef()
-)
-
 coefs <- data.frame(
   true = true_coefs,
   syn_semi = do.call(cbind, syn_coefs_semi) |> rowMeans(),
   syn_adj = do.call(cbind, syn_coefs_adj) |> rowMeans()
-) |>
-  round(5)
+)
 
 
 bias <- data.frame(
   syn_semi = (do.call(cbind, syn_coefs_semi) |> rowMeans() - true_coefs) / true_ses,
   syn_adj = (do.call(cbind, syn_coefs_adj) |> rowMeans() - true_coefs) / true_ses
 )
-
 
 save(list = c("df", "synlist", "PE", "PE_allvars",
                "coefs", "bias"),

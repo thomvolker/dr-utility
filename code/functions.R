@@ -58,8 +58,8 @@ knn_ratio <- function(nu, de, k) {
   nnu <- nrow(nu)
   nde <- nrow(de)
   p <- ncol(nu)
-  Dnu <- densityratio::distance(nu, nu) |> sqrt()
-  Dde <- densityratio::distance(nu, de) |> sqrt()
+  Dnu <- densityratio:::distance(nu, nu) |> sqrt()
+  Dde <- densityratio:::distance(nu, de) |> sqrt()
   nn_nu <- apply(Dnu, 1, \(x) order(x)[k+1])
   nn_de <- apply(Dde, 1, \(x) order(x)[k])
   Dnn_nu <- t(Dnu)[0:(nnu-1)*ncol(Dnu) + nn_nu]

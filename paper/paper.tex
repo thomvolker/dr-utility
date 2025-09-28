@@ -1,26 +1,28 @@
 % Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
 ]{article}
-
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else  
-    % xetex/luatex font selection
-    \setmainfont[]{Latin Modern Roman}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Latin Modern Roman}
   \setmathfont[]{Latin Modern Math}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
@@ -39,9 +41,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -107,8 +106,7 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -120,17 +118,21 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
+
+
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
@@ -164,6 +166,18 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -235,14 +249,9 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
-
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
-
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={A density ratio framework for evaluating the utility of synthetic data},
   pdfauthor={Thom Benjamin Volker; Peter-Paul de Wolf; Erik-Jan van Kesteren},
@@ -316,16 +325,16 @@ tremendously. Open data allows third-party researchers to answer
 research questions with already collected data, freeing up resources
 that would otherwise be devoted to data collection
 (\citeproc{ref-ramachandran_open_2021}{Ramachandran, Bugbee, and Murphy
-2021}). Sharing data in combination with code allows others to validate
-research findings and build upon the work
+2021}). Sharing data with the accompanying with code allows others to
+validate research findings and build upon the work
 (\citeproc{ref-obels_analysis_2020}{Obels et al. 2020};
 \citeproc{ref-crosas_automating_2015}{Crosas et al. 2015}). Students can
 benefit from open data, as it fosters education with realistic data
-(\citeproc{ref-atenas_open_2015}{Atenas, Havemann, and Priego 2015}), as
-well as the general public, through stimulating citizen science projects
-(\citeproc{ref-newman_future_2012}{Newman et al. 2012}). However, making
-data openly available is often (rightfully) hampered by official
-legislation, like the General Data Protection Regulation (GDPR;
+(\citeproc{ref-atenas_open_2015}{Atenas, Havemann, and Priego 2015}),
+and so can the general public, through stimulating citizen science
+projects (\citeproc{ref-newman_future_2012}{Newman et al. 2012}).
+However, making data openly available is (rightfully) hampered by
+official legislation, like the General Data Protection Regulation (GDPR;
 \citeproc{ref-gdpr}{European Parliament and Council of the European
 Union 2016}), and general privacy concerns. In the worst case, sharing
 data may cause harm to individuals or organizations, which may withhold
@@ -445,33 +454,33 @@ data sets have similar multivariate distributions, the density ratio
 should be close to one over the range of the data. If the distributions
 of the observed and synthetic data are very different, the density ratio
 should be far from one at those regions where the distributions differ.
-As density estimation is known to be a difficult problem, the density
-ratio estimation framework provides techniques to directly estimate the
-density ratio, rather than the two separate densities, in a
-non-parametric way
+The density ratio estimation framework approaches the problem by
+estimating the density ratio directly in a non-parametric way
 (\citeproc{ref-sugiyama_suzuki_kanamori_2012}{Sugiyama, Suzuki, and
-Kanamori 2012a}). These non-parametric estimation techniques come with
-automatic model specification, which mitigates the issue of model
-specification. This functionality is implemented in the
-\texttt{R}-package \texttt{densityratio}
-(\citeproc{ref-densityratio}{Volker 2023}). Importantly, the density
-ratio is estimated over the entire range of the data, which provides
-measures of utility at every (possible) point in the data space. This
-point-specific quantification of utility turns out to be a useful
-side-product, as it allows to reweigh analyses on synthetic data when
-further improving the utility directly is not possible.
+Kanamori 2012a}). This approach alleviates the challenging problem of
+estimating two densities, which may magnify estimation errors when
+subsequently taking their ratio. The density ratio framework is made
+readily available in the \texttt{R}-package \texttt{densityratio}
+(\citeproc{ref-densityratio}{Volker 2023}), which attempts to further
+simplify the procedure by implementing automatic hyperparameter
+optimization, which mitigates the issue of model specification.
+Importantly, the density ratio is estimated over the entire range of the
+data, which provides measures of utility at every (possible) point in
+the data space. This point-specific quantification of utility turns out
+to be a useful side-product, as it allows to reweigh analyses on
+synthetic data when further improving the utility directly is not
+possible.
 
 In the remainder of the article, we introduce the density ratio
-framework and the associated estimation techniques, and connect the
-framework to traditional utility measures as the \(pMSE\) and the
-Kullback-Leibler divergence. We then present simulations to demonstrate
-the performance of density ratio estimation in stylized settings and
-compare it to traditional utility measures. Subsequently, we apply
-density ratio estimation in a case study where we evaluate the utility
-of multiple synthetic versions of the U.S. Current Population Survey. We
-conclude with a discussion of the results, highlight the strengths and
-weaknesses of the density ratio framework, and provide recommendations
-for future research.
+framework and connect it to traditional utility measures as the \(pMSE\)
+and the Kullback-Leibler divergence. We then present simulations to
+demonstrate the performance of density ratio estimation in stylized
+settings and compare it to traditional utility measures. Subsequently,
+we apply density ratio estimation in a case study where we evaluate the
+utility of multiple synthetic versions of the U.S. Current Population
+Survey. We conclude with a discussion of the results, highlight the
+strengths and weaknesses of the density ratio framework, and provide
+recommendations for future research.
 
 \section{Background}\label{background}
 
@@ -523,12 +532,12 @@ mean-squared error (\(pMSE\)), introduced by Woo et al.
 (\citeproc{ref-Woo_global_2009}{2009}) and further developed in Snoke et
 al. (\citeproc{ref-snoke_utility_2018}{2018}), formalizes this
 intuition. Let \(I_i\) denote an indicator variable that equals \(1\) if
-observation \(i\) (\(i \in 1, \dots, N\), \(N = \nobs + \nsyn\)) belongs
-to the synthetic data, and \(0\) otherwise. We then train a classifier
-that outputs the predicted probability of observation \(i\) being a
-synthetic record \(\hat{\pi}_i\) based on the observation's scores on
-the variables (this can be the set of all variables, but also a subset).
-From these, we can calculate the utility statistic
+observation \(i\) (\(i \in 1, \dots, N\); \(N = \nobs + \nsyn\)) belongs
+to the synthetic data, and \(0\) otherwise. These indicators are used in
+a classifier that outputs the predicted probability of observation \(i\)
+being a synthetic record \(\hat{\pi}_i\) based on the observation's
+scores on the variables (this can be the set of all variables, but also
+a subset). From these, the utility statistic is calculated as
 \begin{equation}\phantomsection\label{eq-pMSE}{
 pMSE = \frac{1}{N} \sum_{i=1}^N \Big(\hat{\pi}_i - \frac{\nsyn}{N}\Big)^2,
 }\end{equation} which ought to be smaller when the synthetic data is
@@ -626,16 +635,14 @@ by modelling the density ratio \(r(\bx)\). In our case, we define
 \(r(\bx)\) as the ratio between the probability distributions of the
 numerator samples, taken from the observed data distribution,
 \(\pobs(\bx)\), and the denominator samples, taken from the synthetic
-data distribution, \(\psyn(\bx)\), such that
-\begin{equation}\phantomsection\label{eq-dr}{
+data distribution, \(\psyn(\bx)\), assumed to have common support, such
+that \begin{equation}\phantomsection\label{eq-dr}{
 r(\bx) = \frac{\pobs(\bx)}{\psyn(\bx)}.
-}\end{equation}
-
-This specification has the intuitive interpretation that in locations
-where the density ratio takes values larger than 1, too few synthetic
-observations are generated in that region. Conversely, in locations
-where the density ratio takes values smaller than one, too many
-synthetic observations are generated in that region (see
+}\end{equation} This specification has the intuitive interpretation that
+in locations where the density ratio takes values larger than 1, too few
+synthetic observations are generated in that region. Conversely, in
+locations where the density ratio takes values smaller than one, too
+many synthetic observations are generated in that region (see
 Figure~\ref{fig-dr-plot}). We put \(\pobs(\bx)\) in the numerator such
 that it plays the role of the actual distribution, while \(\psyn(\bx)\)
 serves as the approximating distribution (we briefly come back to this
@@ -667,7 +674,7 @@ dimensionality of the data increases (e.g.,
 
 \centering{
 
-\includegraphics[width=1\textwidth,height=\textheight]{paper_files/figure-pdf/fig-dr-plot-1.pdf}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-dr-plot-1.pdf}
 
 }
 
@@ -776,9 +783,7 @@ function \(\mathcal{L}(r(\bx), \hat{r}(\bx))\) in
 Equation~\ref{eq-bregman-objective}. Potentially, the loss function can
 be extended with a regularization term (e.g., a \(L_1\) or \(L_2\) norm
 on the parameters of the model), to decrease the flexibility of the
-density ratio. Parameter estimation can be carried out using standard
-optimization techniques (see Appendix \ref{sec-app-A} for a brief
-demonstration in \texttt{R}).
+density ratio.
 
 Also for the basis functions, several specifications are possible,
 ranging from an identity function
@@ -799,7 +804,7 @@ kernel function is defined as \[
 \right),
 \] where \(\boldsymbol{c}_j\) (\(j \in 1, \dots, b\)) denotes the
 centers of the Gaussian kernel functions, and \(\sigma\) controls the
-kernel width (i.e., it defines over which distance differences between
+kernel width (i.e., it defines over which distance similarity between
 the observations and the centers are considered relevant; for more
 information on kernel functions, see, e.g.,
 \citeproc{ref-murphy_pmlintro_2022}{Murphy 2022}). The appropriate width
@@ -813,10 +818,12 @@ estimated. The \texttt{densityratio} package in R
 commonly used loss functions with a Gaussian kernel basis function. The
 package comes with an easy-to-use interface, automatic cross-validation
 of hyperparameters and builds on \texttt{C++} for fast computation (see
-Appendix \ref{sec-app-A} for a brief demonstration). The density ratio
-estimation framework thus equips researchers with a measure of utility
-which is accurate, fast to compute and does not require user
-specification of the model.
+Appendix \ref{sec-app-A} for a brief demonstration). Alternatively,
+parameter estimation can be carried out using standard optimization
+techniques (see Appendix \ref{sec-app-A} for a brief demonstration of
+both approaches). The density ratio estimation framework thus equips
+researchers with a measure of utility which is accurate, fast to compute
+and does not require user specification of the model.
 
 \subsubsection{Evaluating data utility with the density
 ratio}\label{evaluating-data-utility-with-the-density-ratio}
@@ -833,7 +840,7 @@ relative measure of the quality of the synthetic data. That is, for
 different synthetic data sets, we can calculate the divergence to the
 observed data, and compare these values to determine which synthetic
 data set is most similar to the observed data. More formally, the
-\(f\)-divergence can be used in a hypothesis test to determine whether
+\(f\)-divergence can be used in a permutation test to determine whether
 the synthetic data is generated from the same distribution as the
 observed data. The corresponding \(p\)-value can be calculated by
 comparing the observed divergence measure to the null distribution of
@@ -929,14 +936,14 @@ specifications of the data generating mechanisms are as follows:
 \tightlist
 \item
   Laplace distribution with location parameter \(\mu = 1\) and scale
-  parameter \(b = 1\).
+  \(b = 1\).
 \item
-  Log-normal distribution with log-mean parameter
-  \(\mu_{\text{log}} = \log \{1/\sqrt{3} \}\) and log-variance parameter
+  Log-normal distribution with log-mean
+  \(\mu_{\text{log}} = \log \{1/\sqrt{3} \}\) and log-variance
   \(\sigma^2_\text{log} = \log 3\).
 \item
   Location-scale \(t\)-distribution with location parameter \(\mu = 1\),
-  scale parameter \(\tau^2 = 1\) and degrees of freedom \(\nu = 4\).
+  scale \(\tau^2 = 1\) and degrees of freedom \(\nu = 4\).
 \item
   Normal distribution with mean \(\mu = 1\) and variance
   \(\sigma^2 = 2\).
@@ -963,7 +970,7 @@ default settings in the \texttt{densityratio} package.
 
 \centering{
 
-\includegraphics[width=1\textwidth,height=\textheight]{paper_files/figure-pdf/fig-densities-sim1-1.pdf}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-densities-sim1-1.pdf}
 
 }
 
@@ -984,7 +991,7 @@ overlapping.}
 
 \centering{
 
-\includegraphics[width=1\textwidth,height=\textheight]{paper_files/figure-pdf/fig-sim1-results-1.png}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-sim1-results-1.png}
 
 }
 
@@ -1156,17 +1163,17 @@ a CART model and a logistic regression model, respectively.
 \toprule
 $n$ & $D$ & $PE$ & $KL_1$ & $KL_{\sqrt{n}}$ & $pMSE_{\text{CART}}$ & $pMSE_{\text{logit}}$\\
 \midrule
-100 & 5 & 0.583 & 0.844 & 0.904 & 0.369 & 0.188\\
-100 & 25 & 0.450 & 0.838 & 0.933 & 0.364 & 0.250\\
-100 & 50 & 0.363 & 0.673 & 0.786 & 0.348 & 0.352\\
+100 & 5 & 0.583 & 0.844 & 0.904 & 0.362 & 0.188\\
+100 & 25 & 0.450 & 0.838 & 0.933 & 0.368 & 0.250\\
+100 & 50 & 0.363 & 0.673 & 0.786 & 0.352 & 0.352\\
 \addlinespace
-1000 & 5 & 1.000 & 1.000 & 1.000 & 0.887 & 0.173\\
-1000 & 25 & 1.000 & 1.000 & 1.000 & 0.893 & 0.242\\
-1000 & 50 & 0.995 & 1.000 & 1.000 & 0.846 & 0.316\\
+1000 & 5 & 1.000 & 1.000 & 1.000 & 0.885 & 0.173\\
+1000 & 25 & 1.000 & 1.000 & 1.000 & 0.898 & 0.242\\
+1000 & 50 & 0.997 & 1.000 & 1.000 & 0.839 & 0.316\\
 \addlinespace
-2000 & 5 & 1.000 & 1.000 & 1.000 & 0.885 & 0.173\\
-2000 & 25 & 1.000 & 1.000 & 1.000 & 0.822 & 0.247\\
-2000 & 50 & 1.000 & 1.000 & 1.000 & 0.788 & 0.324\\
+2000 & 5 & 1.000 & 1.000 & 1.000 & 0.882 & 0.173\\
+2000 & 25 & 1.000 & 1.000 & 1.000 & 0.816 & 0.247\\
+2000 & 50 & 1.000 & 1.000 & 1.000 & 0.780 & 0.324\\
 \bottomrule
 \end{tabular}
 
@@ -1218,13 +1225,17 @@ data set.
 
 \centering{
 
-\includegraphics[width=1\textwidth,height=\textheight]{paper_files/figure-pdf/fig-sim2-results-1.png}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-sim2-results-1.png}
 
 }
 
-\caption{\label{fig-sim2-results}Utility measures for \(n = 1000\) and
-\(D = 25\) for \(PE\), \(KL_{\sqrt{n}}\) and \(pMSE_{\text{cart}}\) for
-\(1000\) simulations of the three synthetic data models.}
+\caption{\label{fig-sim2-results}The estimated utility measures (\(PE\),
+\(KL_{\sqrt{n}}\) and \(pMSE_{\text{cart}}\)) for \(n = 1000\)
+observations and \(D = 25\) variables in \(1000\) simulations for the
+three increasingly accurate synthetic data models. All metrics show how
+the estimated utility improves with the refinements of the synthesis
+models, but \(PE\) and \(KL_{\sqrt{n}}\) show less variability and catch
+the synthesis model improvements more consistently.}
 
 \end{figure}%
 
@@ -1293,7 +1304,7 @@ estimation}\label{evaluating-global-utility-using-density-ratio-estimation}
 
 \centering{
 
-\includegraphics[width=1\textwidth,height=\textheight]{paper_files/figure-pdf/fig-application-distributions-1.pdf}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-application-distributions-1.pdf}
 
 }
 
@@ -1322,10 +1333,10 @@ variables, as there are no differences in synthesis methods. When
 evaluating the global utility of the two synthetic data sets, the
 improvement in synthesis models is reflected in the Pearson divergence.
 That is, the transformed modelling strategy has a higher average
-estimated Pearson divergence (\(\bar{PE}_\text{transformed} = 0.090\),
-\(\text{range} = [0.084, 0.100]\)) than the semi-continuous modelling
-strategy (\(\bar{PE}_\text{semi-continuous} = 0.050\),
-\(\text{range} = [0.047, 0.053]\)). Although the difference may seem
+estimated Pearson divergence (\(\bar{PE}_\text{transformed} = 0.085\),
+\(\text{range} = [0.080, 0.091]\)) than the semi-continuous modelling
+strategy (\(\bar{PE}_\text{semi-continuous} = 0.047\),
+\(\text{range} = [0.044, 0.050]\)). Although the difference may seem
 small in an absolute sense, it is substantial in a relative sense.
 Additionally, the variability in estimated Pearson divergences for each
 synthesis strategy is much smaller than the difference between the two
@@ -1346,7 +1357,7 @@ estimates}\label{density-ratios-as-local-utility-estimates}
 
 \centering{
 
-\includegraphics[width=1\textwidth,height=\textheight]{paper_files/figure-pdf/fig-app-utility-results-1.png}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-app-utility-results-1.png}
 
 }
 
@@ -1437,19 +1448,19 @@ the observed data.}
 \toprule
 Variable & Observed & Synthetic & Reweighted\\
 \midrule
-Intercept & 10.297 & 10.192 & \textbf{10.195}\\
+Intercept & 10.297 & \textbf{10.192} & 10.182\\
 Age & -0.003 & -0.005 & \textbf{-0.004}\\
-Education: High school & 0.283 & 0.415 & \textbf{ 0.385}\\
-Education: Associate or Bachelor's degree & 0.593 & 0.782 & \textbf{ 0.731}\\
-Education: Master's degree or higher & 1.016 & 1.135 & \textbf{ 1.080}\\
-Marital: Separated & -0.500 & -0.434 & \textbf{-0.437}\\
-Marital: Widowed & -0.467 & \textbf{-0.471} & -0.450\\
-Marital: Single & -0.491 & -0.592 & \textbf{-0.565}\\
-Marital: Widowed or divorced & -0.549 & \textbf{-0.518} & -0.508\\
-Race: Non-white & -0.090 & \textbf{-0.109} & -0.111\\
+Education: High school & 0.283 & 0.415 & \textbf{ 0.397}\\
+Education: Associate or Bachelor's degree & 0.593 & 0.782 & \textbf{ 0.744}\\
+Education: Master's degree or higher & 1.016 & 1.135 & \textbf{ 1.092}\\
+Marital: Separated & -0.500 & \textbf{-0.434} & -0.433\\
+Marital: Widowed & -0.467 & \textbf{-0.471} & -0.448\\
+Marital: Single & -0.491 & -0.592 & \textbf{-0.561}\\
+Marital: Widowed or divorced & -0.549 & \textbf{-0.518} & -0.505\\
+Race: Non-white & -0.090 & \textbf{-0.109} & -0.110\\
 Sex: Female & -0.117 & -0.134 & \textbf{-0.126}\\
-log(Tax + 1) & 0.067 & 0.071 & \textbf{ 0.066}\\
-log(Social security + 1) & -0.026 & -0.009 & \textbf{-0.017}\\
+log(Tax + 1) & 0.067 & 0.071 & \textbf{ 0.067}\\
+log(Social security + 1) & -0.026 & -0.009 & \textbf{-0.016}\\
 \bottomrule
 \end{tabular}
 
@@ -1478,7 +1489,7 @@ Averaging the absolute normalized bias over all coefficients and all
 synthetic data sets yields an improvement from approximately
 \(\text{avg}(|\beta_\text{obs}-\beta_\text{syn}|/SE_\text{obs}) = 1.98\)
 to
-\(\text{avg}(|\beta_\text{obs}-\beta_\text{syn-adj}|/SE_\text{obs}) = 1.41\)
+\(\text{avg}(|\beta_\text{obs}-\beta_\text{syn-adj}|/SE_\text{obs}) = 1.54\)
 after reweighing. Hence, besides providing a measure of global utility,
 the estimated density ratio can be used to further improve the utility
 of the synthetic data.
@@ -1576,23 +1587,24 @@ serve the role of discriminator in generative models
 Despite the appealing characteristics of density ratio estimation,
 several open questions remain. Kernel methods, as typically employed in
 density ratio estimation, can be sensitive to the choice of kernel, and
-the use of a Gaussian kernel may not be appropriate in any situation.
-Categorical variables, for instance, are not straightforwardly
-incorporated in the current set-up. To deal with this issue, we created
-dummy variables for each category in our illustration, which seemed to
-provide reasonable results. However, other solutions (i.e., different
-kernels or distance measures) may lead to improvements. Additionally,
-our results showed that the current approach to regularization is not
-ideal, as the density ratio estimates are shrunk towards an estimated
-intercept. However, when the intercept deviates from one, the numerator
-or denominator density are up or downweighted. Rather, one would like to
-shrink the density ratio estimates towards one, as this is more in line
-with the interpretation that there is no information to estimate the
-density ratio. Finally, releasing information from the density ratio may
-pose an additional privacy risk, as it leaks additional information
-about the original data. Presumably, solely releasing a global utility
-measure, such as the Pearson divergence, will yield only additional
-risk. Releasing the density ratio values themselves may, however, pose
+the use of a Gaussian kernel, while a reasonable and versatile default,
+may not be appropriate in every situation. Categorical variables, for
+instance, are not naturally incorporated in the current set-up. To deal
+with this issue, we created dummy variables for the categories of the
+categorical variables in our illustration, which provided reasonable
+results. However, other solutions (i.e., different kernels or distance
+measures) may lead to improvements. Additionally, our results showed
+that the current approach to regularization is not ideal, as the density
+ratio estimates are shrunk towards an estimated intercept. However, when
+the intercept deviates from one, the numerator or denominator density
+are up or downweighted. Rather, one would like to shrink the density
+ratio estimates towards one, as this is more in line with the
+interpretation that there is no information to estimate the density
+ratio. Finally, releasing information from the density ratio may pose an
+additional privacy risk, as it leaks additional information about the
+original data. Presumably, solely releasing a global utility measure,
+such as the Pearson divergence, will yield only additional risk.
+Releasing the density ratio values themselves may, however, pose
 unacceptable privacy risks, especially when the density ratio model is
 sensitive to extreme cases. Privatizing density ratio estimation
 presents an interesting avenue for future research.
@@ -2089,11 +2101,11 @@ Equation~\ref{eq-squared-error-loss}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{Dx }\OtherTok{\textless{}{-}} \FunctionTok{distance}\NormalTok{(x, x, }\ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{Dy }\OtherTok{\textless{}{-}} \FunctionTok{distance}\NormalTok{(y, x, }\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Dx }\OtherTok{\textless{}{-}}\NormalTok{ densityratio}\SpecialCharTok{:::}\FunctionTok{distance}\NormalTok{(x, x, }\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{Dy }\OtherTok{\textless{}{-}}\NormalTok{ densityratio}\SpecialCharTok{:::}\FunctionTok{distance}\NormalTok{(y, x, }\ConstantTok{TRUE}\NormalTok{)}
 
-\NormalTok{Kx }\OtherTok{\textless{}{-}} \FunctionTok{kernel\_gaussian}\NormalTok{(Dx, }\AttributeTok{sigma =} \DecValTok{1}\NormalTok{)}
-\NormalTok{Ky }\OtherTok{\textless{}{-}} \FunctionTok{kernel\_gaussian}\NormalTok{(Dy, }\AttributeTok{sigma =} \DecValTok{1}\NormalTok{)}
+\NormalTok{Kx }\OtherTok{\textless{}{-}}\NormalTok{ densityratio}\SpecialCharTok{:::}\FunctionTok{kernel\_gaussian}\NormalTok{(Dx, }\AttributeTok{sigma =} \DecValTok{1}\NormalTok{)}
+\NormalTok{Ky }\OtherTok{\textless{}{-}}\NormalTok{ densityratio}\SpecialCharTok{:::}\FunctionTok{kernel\_gaussian}\NormalTok{(Dy, }\AttributeTok{sigma =} \DecValTok{1}\NormalTok{)}
 
 \NormalTok{loss }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(alpha, Kx, Ky) \{}
   \FunctionTok{mean}\NormalTok{((Ky }\SpecialCharTok{\%*\%}\NormalTok{ alpha }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{*}\NormalTok{ Ky }\SpecialCharTok{\%*\%}\NormalTok{ alpha }\SpecialCharTok{{-}}\NormalTok{ (Ky }\SpecialCharTok{\%*\%}\NormalTok{ alpha }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{/} \DecValTok{2}\NormalTok{) }\SpecialCharTok{{-}}
@@ -2124,7 +2136,7 @@ sum of squared difference between the predicted density ratios equals
 
 \centering{
 
-\includegraphics{paper_files/figure-pdf/fig-AppA-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-pdf/fig-AppA-1.pdf}}
 
 }
 
@@ -2165,8 +2177,8 @@ Kernel Information:
 
 Regularization parameter (lambda): num [1:20] 1000 483.3 233.6 112.9 54.6 ...
 
-Optimal sigma: 0.7045195
-Optimal lambda: 1.43845
+Optimal sigma (loocv): 0.7045195
+Optimal lambda (loocv): 1.43845
 Optimal kernel weights (loocv): num [1:251] 0.03123 0.03174 0.02443 0.00876 0.01296 ...
  
 \end{verbatim}
@@ -2237,7 +2249,7 @@ estimation through uLSIF.
 
 \centering{
 
-\includegraphics[width=1\textwidth,height=\textheight]{paper_files/figure-pdf/fig-AppB-1.png}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-AppB-1.png}
 
 }
 
